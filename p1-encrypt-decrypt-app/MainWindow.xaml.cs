@@ -24,5 +24,10 @@ namespace p1_encrypt_decrypt_app
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
