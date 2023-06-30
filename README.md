@@ -11,12 +11,12 @@ Hoang Huu Minh An - 20127102
 Tran Tien Hoang - 20127424
 
 ## 🏗️ Build Mode
-- MVVM
+- MVVM model and using System.Security.Cryptography
 
-- Generate Kprivate and Kpublic by `RSA` algorithm.
-  - Length of keys: 42, 256, 1024, 2048 bits
-
-- Calculate hash value of string by SHA-1, SHA-256
+- Class EncryptionAlgorithm
+  - Generate Kprivate and Kpublic by `RSA` algorithm.
+    - Length of keys: 64, 256, 1024, 2048 bits
+  - Calculate hash value of string by `SHA-1`, `SHA-256`
 ## 🖥️ GUI
 
 ## 🔎 How to use
