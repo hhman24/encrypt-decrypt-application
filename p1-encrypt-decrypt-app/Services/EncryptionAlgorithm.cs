@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace p1_encrypt_decrypt_app.Services
 {
@@ -13,20 +14,35 @@ namespace p1_encrypt_decrypt_app.Services
         /*
          * Generate Kprivate and Kpublic
          */
-        public static List<string> Generate_RSA_Key(int key_size)
+        public static (string, string) Generate_RSA_Key(int key_size)
         {
             using(RSA _rsa = RSA.Create(key_size))
             {
-                // Create list string to store private key, public key
-                List<string> key_pair = new List<string>();
+                try
+                {
+                    // return xml string contain key of information
+                    // True include public + privatekey
+                    // False only public key
+                    //string Kprivate = _rsa.ToXmlString(true);
+                    //string Kpublic = _rsa.ToXmlString(false);
 
-                // return xml string contain key of information
-                // True include public + privatekey
-                // False only public key
-                key_pair.Add(_rsa.ToXmlString(true));
-                key_pair.Add(_rsa.ToXmlString(false));
+                    // Export private and public key
+                    // A byte array containing the PKCS#1 RSAPublicKey representation of this key
+                    string Kprivate = Convert.ToBase64String(_rsa.ExportRSAPrivateKey());
+                    string Kpublic = Convert.ToBase64String(_rsa.ExportRSAPublicKey());
 
-                return key_pair;
+                    return (Kprivate, Kpublic);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Format exception");
+                    return ("", "");
+                }
+                catch (CryptographicException)
+                {
+                    MessageBox.Show("Cryptographic exception");
+                    return ("", "");
+                }
             }
 
         }
@@ -39,10 +55,24 @@ namespace p1_encrypt_decrypt_app.Services
         {
             using(RSA _rsa = RSA.Create())
             {
-                _rsa.FromXmlString(Kpublic);
-                byte[] c = _rsa.Encrypt(Encoding.UTF8.GetBytes(p), RSAEncryptionPadding.Pkcs1);
+                try
+                {
+                    //_rsa.FromXmlString(Kpublic);
+                    _rsa.ImportRSAPublicKey(Convert.FromBase64String(Kpublic), out int bytesRead);
+                    byte[] c = _rsa.Encrypt(Encoding.UTF8.GetBytes(p), RSAEncryptionPadding.Pkcs1);
 
-                return Convert.ToBase64String(c);
+                    return Convert.ToBase64String(c);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Format exception");
+                    return "";
+                }
+                catch (CryptographicException)
+                {
+                    MessageBox.Show("Cryptographic exception");
+                    return "";
+                }
             }
         }
 
@@ -54,10 +84,24 @@ namespace p1_encrypt_decrypt_app.Services
         {
             using(RSA _rsa = RSA.Create())
             {
-                _rsa.FromXmlString(Kprivate);
-                byte[] p = _rsa.Decrypt(Convert.FromBase64String(c), RSAEncryptionPadding.Pkcs1);
-                
-                return Encoding.UTF8.GetString(p);
+                try
+                {
+                    //_rsa.FromXmlString(Kpublic);
+                    _rsa.ImportRSAPublicKey(Convert.FromBase64String(Kprivate), out int bytesRead);
+                    byte[] p = _rsa.Encrypt(Encoding.UTF8.GetBytes(c), RSAEncryptionPadding.Pkcs1);
+
+                    return Convert.ToBase64String(p);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Format exception");
+                    return "";
+                }
+                catch (CryptographicException)
+                {
+                    MessageBox.Show("Cryptographic exception");
+                    return "";
+                }
             }
         }
 
