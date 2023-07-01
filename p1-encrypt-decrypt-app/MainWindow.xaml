@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello Làm đồ án nhe" VerticalAlignment="Center" Width="115" TextChanged="TextBox_TextChanged" FontFamily="Arial Narrow" FontSize="14" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Center" 
+                 TextWrapping="Wrap" 
+                 Text="Hello Làm đồ án nhe" 
+                 VerticalAlignment="Center" 
+                 Width="115" TextChanged="TextBox_TextChanged" 
+                 FontFamily="Arial Narrow" FontSize="14" 
+                 FontWeight="Bold"/>
+        
 
+        
+        
     </Grid>
 </Window>
