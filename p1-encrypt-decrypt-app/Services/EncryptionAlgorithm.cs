@@ -10,6 +10,31 @@ namespace p1_encrypt_decrypt_app.Services
     internal class EncryptionAlgorithm
     {
 
+        /*
+         * Generate Kprivate and Kpublic
+         */
+        public static List<string> Generate_RSA_Key(int key_size)
+        {
+            using(RSA _rsa = RSA.Create(key_size))
+            {
+                // Create list string to store private key, public key
+                List<string> key_pair = new List<string>();
+
+                // return xml string contain key of information
+                // True include public + privatekey
+                // False only public key
+                key_pair.Add(_rsa.ToXmlString(true));
+                key_pair.Add(_rsa.ToXmlString(false));
+
+                return key_pair;
+            }
+
+        }
+
+
+        /*
+         * Calculate hash value with 2 functions.
+         */
         public static string Hash_SHA1(string p)
         {
             using (SHA1 hash_sha1 = SHA1.Create())
