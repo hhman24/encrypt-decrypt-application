@@ -31,6 +31,36 @@ namespace p1_encrypt_decrypt_app.Services
 
         }
 
+        /*
+         * Encrypt string by RSA Algorithm
+         * Kpublic: contains key public xml string info 
+         */
+        public static string Encrypt_RSA(string Kpublic, string p)
+        {
+            using(RSA _rsa = RSA.Create())
+            {
+                _rsa.FromXmlString(Kpublic);
+                byte[] c = _rsa.Encrypt(Encoding.UTF8.GetBytes(p), RSAEncryptionPadding.Pkcs1);
+
+                return Convert.ToBase64String(c);
+            }
+        }
+
+        /*
+         * Decrypt string by RSA algorithm
+         * Kprivate: contains key private xml string info 
+         */
+        public static string Decrypt_RSA(string Kprivate, string c)
+        {
+            using(RSA _rsa = RSA.Create())
+            {
+                _rsa.FromXmlString(Kprivate);
+                byte[] p = _rsa.Decrypt(Convert.FromBase64String(c), RSAEncryptionPadding.Pkcs1);
+                
+                return Encoding.UTF8.GetString(p);
+            }
+        }
+
 
         /*
          * Calculate hash value with 2 functions.
