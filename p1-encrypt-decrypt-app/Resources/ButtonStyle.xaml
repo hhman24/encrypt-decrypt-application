@@ -98,4 +98,32 @@
 
     </Style>
 
+    <!--Button-->
+    <Style x:Key="button" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontSize" Value="13.5"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Foreground" Value="{DynamicResource titleColor1}"/>
+        <Setter Property="Background" Value="#773DFF"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Height="30"
+                            CornerRadius="6"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" 
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#836EFB"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
 </ResourceDictionary>

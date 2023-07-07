@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:p1_encrypt_decrypt_app"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:ViewModels="clr-namespace:p1_encrypt_decrypt_app.ViewModels"
+        xmlns:View="clr-namespace:p1_encrypt_decrypt_app.View.Pages"
+        
         mc:Ignorable="d"
         
         Title="Cryptography Application" Height="650" Width="1000"
@@ -13,38 +16,47 @@
         AllowsTransparency="True"
         Background="Transparent">
 
+    <Window.DataContext>
+        <ViewModels:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:EncryptViewModel}">
+            <View:EncryptView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type ViewModels:DecryptViewModel}">
+            <View:DecryptView/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Border CornerRadius="12">
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="228"/>
+                <ColumnDefinition Width="230"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
             <!--#region Column 0-->
             <Border CornerRadius="12,0,0,12"
                     Grid.Column="0">
-
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
                         <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
                         <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-
                 <StackPanel>
                     <!--Logo-->
                     <StackPanel Orientation="Horizontal"
                                 Height="50"
                                 Margin="15,100,0,40">
-
                         <fa:IconImage Icon="ShieldCat"
                                       Style="{StaticResource menu_button_icon}"
                                       Width="50"
                                       Height="50"
                                       Margin="10,0,10,0"
                                       Foreground="{StaticResource color1}"/>
-
                         <TextBlock Text="M E N U"
                                    Foreground="{StaticResource titleColor2}"
                                    FontSize="30"
@@ -53,10 +65,11 @@
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0"/>
                     </StackPanel>
-
                     <!--menu button-->
                     <RadioButton Style="{StaticResource menu_button}"
-                                 Tag="{StaticResource color4}">
+                                 Tag="{StaticResource color4}"
+                                 IsChecked="True"
+                                 Command="{Binding ShowEncryptViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Lock" Style="{StaticResource menu_button_icon}"/>
                             <TextBlock Text="Encryption" 
@@ -64,9 +77,9 @@
                                        FontSize="23"/>
                         </StackPanel>
                     </RadioButton>
-
                     <RadioButton Style="{StaticResource menu_button}"
-                                 Tag="{StaticResource color8}">
+                                 Tag="{StaticResource color8}"
+                                 Command="{Binding ShowDecryptViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="LockOpen" Style="{StaticResource menu_button_icon}"/>
                             <TextBlock Text="Decryption" 
@@ -77,9 +90,6 @@
                 </StackPanel>
             </Border>
             <!--#endregion Column 0-->
-
-
-
             <!--#endregion Column 1-->
             <Border CornerRadius="0,12,12,0"
                     Grid.Column="1">
@@ -97,7 +107,7 @@
                         <!--content section-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
+                    <!--control bar-->
                     <StackPanel x:Name="pnl_control_bar"
                                 Grid.Row="0"
                                 Orientation="Horizontal"
@@ -129,22 +139,16 @@
                             <fa:IconImage Icon="WindowMinimize" Style="{StaticResource bar_button_icon}"/>
 
                         </Button>
-
-
                     </StackPanel>
-
-
+                    <!--content section-->
+                    <ContentControl Content="{Binding Current_child_view}"
+                                    Grid.Row="1"
+                                    Margin="10">
+                        
+                    </ContentControl>
                 </Grid>
             </Border>
-
-
-
             <!--#region Column 1-->
-
-
-
         </Grid>
-
     </Border>
-
 </Window>
