@@ -5,116 +5,78 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.IO;
 
 namespace p1_encrypt_decrypt_app.Services
 {
-    internal class EncryptionAlgorithm
+    public class EncryptionAlgorithm
     {
 
         /*
          * Generate Kprivate and Kpublic
          */
-        public static (string, string) Generate_RSA_Key(int key_size)
+        public static (string, string) Generate_RSA_Key(int keySize)
         {
-            using(RSA _rsa = RSA.Create(key_size))
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(keySize))
             {
                 try
                 {
-                    // return xml string contain key of information
-                    // True include public + privatekey
-                    // False only public key
-                    //string Kprivate = _rsa.ToXmlString(true);
-                    //string Kpublic = _rsa.ToXmlString(false);
-
-                    // Export private and public key
-                    // A byte array containing the PKCS#1 RSAPublicKey representation of this key
-                    string Kprivate = Convert.ToBase64String(_rsa.ExportRSAPrivateKey());
-                    string Kpublic = Convert.ToBase64String(_rsa.ExportRSAPublicKey());
-
-                    return (Kprivate, Kpublic);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Format exception");
-                    return ("", "");
+                    string Kpublic = rsa.ToXmlString(false);
+                    string Kprivate = rsa.ToXmlString(true);
+                    return (Kpublic, Kprivate);
                 }
                 catch (CryptographicException)
                 {
-                    MessageBox.Show("Cryptographic exception");
+                    // MessageBox.Show("Cryptographic exception");
                     return ("", "");
                 }
             }
-
         }
-
-        /*
-         * Encrypt string by RSA Algorithm
-         * Kpublic: contains key public xml string info 
-         */
+        //encrypt RSA
         public static string Encrypt_RSA(string Kpublic, string p)
         {
-            using(RSA _rsa = RSA.Create())
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
             {
                 try
                 {
-                    //_rsa.FromXmlString(Kpublic);
-                    _rsa.ImportRSAPublicKey(Convert.FromBase64String(Kpublic), out int bytesRead);
-                    byte[] c = _rsa.Encrypt(Encoding.UTF8.GetBytes(p), RSAEncryptionPadding.Pkcs1);
-
-                    return Convert.ToBase64String(c);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Format exception");
-                    return "";
+                    rsa.FromXmlString(Kpublic);
+                    byte[] bytes = Encoding.UTF8.GetBytes(p);
+                    byte[] encrypted = rsa.Encrypt(bytes, false);
+                    return Convert.ToBase64String(encrypted);
                 }
                 catch (CryptographicException)
                 {
-                    MessageBox.Show("Cryptographic exception");
+                    // MessageBox.Show("Cryptographic exception");
                     return "";
                 }
             }
         }
-
-        /*
-         * Decrypt string by RSA algorithm
-         * Kprivate: contains key private xml string info 
-         */
+        //decrypt RSA
         public static string Decrypt_RSA(string Kprivate, string c)
         {
-            using(RSA _rsa = RSA.Create())
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
             {
                 try
                 {
-                    //_rsa.FromXmlString(Kpublic);
-                    _rsa.ImportRSAPublicKey(Convert.FromBase64String(Kprivate), out int bytesRead);
-                    byte[] p = _rsa.Encrypt(Encoding.UTF8.GetBytes(c), RSAEncryptionPadding.Pkcs1);
-
-                    return Convert.ToBase64String(p);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Format exception");
-                    return "";
+                    rsa.FromXmlString(Kprivate);
+                    byte[] bytes = Convert.FromBase64String(c);
+                    byte[] decrypted = rsa.Decrypt(bytes, false);
+                    return Encoding.UTF8.GetString(decrypted);
                 }
                 catch (CryptographicException)
                 {
-                    MessageBox.Show("Cryptographic exception");
+                    // MessageBox.Show("Cryptographic exception");
                     return "";
                 }
             }
         }
 
-
-        /*
-         * Calculate hash value with 2 functions.
-         */
-        public static string Hash_SHA1(string p)
+         public static string Hash_SHA1(string p)
         {
             using (SHA1 hash_sha1 = SHA1.Create())
             {   
                 // SHA1 returns 160 bits for the hash - encoding of string is UTF8
-                byte[] hash = hash_sha1.ComputeHash(Encoding.UTF8.GetBytes(p + p.Reverse()));
+                byte[] hash = hash_sha1.ComputeHash(Encoding.UTF8.GetBytes(p));
 
                 // This is converts 20 bytes hash into the string hex representation of byte
                 // (FB-43-AB....) that looklike
@@ -130,7 +92,7 @@ namespace p1_encrypt_decrypt_app.Services
             using (SHA256 hash_sha1 = SHA256.Create())
             {
                 // SHA256 returns 256 bits for the hash - encoding of string is UTF8
-                byte[] hash = hash_sha1.ComputeHash(Encoding.UTF8.GetBytes(p + p.Reverse()));
+                byte[] hash = hash_sha1.ComputeHash(Encoding.UTF8.GetBytes(p));
 
                 // This is converts 32 bytes hash into the string hex representation of byte
                 // (FB-43-AB....) that looklike
@@ -140,7 +102,6 @@ namespace p1_encrypt_decrypt_app.Services
             }
 
         }
-    
         //generate key for AES
         public static string Generate_AES_Key()
         {
@@ -153,12 +114,12 @@ namespace p1_encrypt_decrypt_app.Services
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Format exception");
+                    // MessageBox.Show("Format exception");
                     return "";
                 }
                 catch (CryptographicException)
                 {
-                    MessageBox.Show("Cryptographic exception");
+                    // MessageBox.Show("Cryptographic exception");
                     return "";
                 }
             }
@@ -170,58 +131,94 @@ namespace p1_encrypt_decrypt_app.Services
             {
                 try
                 {
-                    aes.Key = Encoding.UTF8.GetBytes(key);
+                    aes.Key = Convert.FromBase64String(key);
                     aes.IV = new byte[16];
-                    aes.Mode = CipherMode.CBC;
-                    aes.Padding = PaddingMode.PKCS7;
-
                     ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-
-                    byte[] encrypted = encryptor.TransformFinalBlock(Encoding.UTF8.GetBytes(p), 0, p.Length);
-
-                    return Convert.ToBase64String(encrypted);
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                        {
+                            using (StreamWriter sw = new StreamWriter(cs))
+                            {
+                                sw.Write(p);
+                            }
+                        }
+                        return Convert.ToBase64String(ms.ToArray());
+                    }
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Format exception");
+                    // MessageBox.Show("Format exception");
                     return "";
                 }
                 catch (CryptographicException)
                 {
-                    MessageBox.Show("Cryptographic exception");
+                    // MessageBox.Show("Cryptographic exception");
                     return "";
                 }
             }
         }
-        // decrypt AES
+        //decrypt AES
         public static string Decrypt_AES(string key, string c)
         {
             using (Aes aes = Aes.Create())
             {
                 try
                 {
-                    aes.Key = Encoding.UTF8.GetBytes(key);
+                    aes.Key = Convert.FromBase64String(key);
                     aes.IV = new byte[16];
-                    aes.Mode = CipherMode.CBC;
-                    aes.Padding = PaddingMode.PKCS7;
-
                     ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-
-                    byte[] decrypted = decryptor.TransformFinalBlock(Convert.FromBase64String(c), 0, c.Length);
-
-                    return Encoding.UTF8.GetString(decrypted);
+                    using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(c)))
+                    {
+                        using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                        {
+                            using (StreamReader sr = new StreamReader(cs))
+                            {
+                                return sr.ReadToEnd();
+                            }
+                        }
+                    }
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("Format exception");
+                    // MessageBox.Show("Format exception");
                     return "";
                 }
                 catch (CryptographicException)
                 {
-                    MessageBox.Show("Cryptographic exception");
+                    // MessageBox.Show("Cryptographic exception");
                     return "";
                 }
             }
+        }
+
+        public static string encypt(string path, int keysize)
+        {
+            string key = EncryptionAlgorithm.Generate_AES_Key();
+            byte[] p = File.ReadAllBytes(path);
+            string P = Convert.ToBase64String(p);
+            string c = EncryptionAlgorithm.Encrypt_AES(key, P);
+            File.WriteAllText(path+".metadata", c);
+
+            string Kpublic, Kprivate;
+            (Kpublic, Kprivate) = EncryptionAlgorithm.Generate_RSA_Key(keysize);
+            key = EncryptionAlgorithm.Encrypt_RSA(Kpublic, key);
+            File.WriteAllText(path + ".txt", key + '\n' + Hash_SHA1(Kprivate));
+            return Kprivate;
+        }
+        public static bool decrypt(string path, string Kprivate)
+        {
+            string[] lines = File.ReadAllLines(path + ".txt");
+            if (Hash_SHA1(Kprivate) != lines[1])
+            {
+                return false;
+            }
+            string key = EncryptionAlgorithm.Decrypt_RSA(Kprivate, lines[0]);
+            string c = File.ReadAllText(path + ".metadata");
+            string p = EncryptionAlgorithm.Decrypt_AES(key, c);
+            byte[] P = Convert.FromBase64String(p);
+            File.WriteAllBytes(path, P);
+            return true;
         }
     }
 }
