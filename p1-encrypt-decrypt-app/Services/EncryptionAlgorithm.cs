@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -139,6 +139,89 @@ namespace p1_encrypt_decrypt_app.Services
                 return BitConverter.ToString(hash).Replace("-", "");
             }
 
+        }
+    
+        //generate key for AES
+        public static string Generate_AES_Key()
+        {
+            using (Aes aes = Aes.Create())
+            {
+                try
+                {
+                    aes.GenerateKey();
+                    return Convert.ToBase64String(aes.Key);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Format exception");
+                    return "";
+                }
+                catch (CryptographicException)
+                {
+                    MessageBox.Show("Cryptographic exception");
+                    return "";
+                }
+            }
+        }
+        //encrypt AES
+        public static string Encrypt_AES(string key, string p)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                try
+                {
+                    aes.Key = Encoding.UTF8.GetBytes(key);
+                    aes.IV = new byte[16];
+                    aes.Mode = CipherMode.CBC;
+                    aes.Padding = PaddingMode.PKCS7;
+
+                    ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                    byte[] encrypted = encryptor.TransformFinalBlock(Encoding.UTF8.GetBytes(p), 0, p.Length);
+
+                    return Convert.ToBase64String(encrypted);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Format exception");
+                    return "";
+                }
+                catch (CryptographicException)
+                {
+                    MessageBox.Show("Cryptographic exception");
+                    return "";
+                }
+            }
+        }
+        // decrypt AES
+        public static string Decrypt_AES(string key, string c)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                try
+                {
+                    aes.Key = Encoding.UTF8.GetBytes(key);
+                    aes.IV = new byte[16];
+                    aes.Mode = CipherMode.CBC;
+                    aes.Padding = PaddingMode.PKCS7;
+
+                    ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                    byte[] decrypted = decryptor.TransformFinalBlock(Convert.FromBase64String(c), 0, c.Length);
+
+                    return Encoding.UTF8.GetString(decrypted);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Format exception");
+                    return "";
+                }
+                catch (CryptographicException)
+                {
+                    MessageBox.Show("Cryptographic exception");
+                    return "";
+                }
+            }
         }
     }
 }
