@@ -6,83 +6,151 @@
              xmlns:local="clr-namespace:p1_encrypt_decrypt_app.View.Pages"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="700"
+             Background="Transparent">
     <Grid>
-        <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top"
-                        Grid.Column="0">
-            <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
-            <TextBox Text="Search..."   
-                    FontSize="13"
-                         Height="24"
-                           Width="300"
-                           Background="Transparent"
-                             FontWeight="Medium"
-                             FontFamily="Montserrat"                            
-                             Foreground="{StaticResource plainTextColor3}"
-                             CaretBrush="{StaticResource plainTextColor3}"
-                             BorderBrush="{StaticResource plainTextColor3}"
-                             BorderThickness="0,0,0,1"                             
-                             VerticalContentAlignment="Center"
-                             Margin="5,5,0,0"></TextBox>
-        </StackPanel>
-        <Button Grid.Column="1"
-                            Command="{Binding LoginCommand}"                            
-                            Content="Search"                            
-                            FontSize="12"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            BorderThickness="0"
-                            Foreground="White"
-                    VerticalAlignment="Top">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Background" Value="#773DFF"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border Height="30"
-                                                    CornerRadius="15"
-                                                    Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                                      HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#836EFB"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                CornerRadius="20"
+                Margin="0,10,0,10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                    <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <!--<Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140*"/>
+                        <ColumnDefinition Width="127*"/>
+                        <ColumnDefinition Width="70*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="AES Algorithm"
+                               Style="{StaticResource title_block}"
+                               Grid.Column="0"/>
+                </Grid>-->
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="0"
+                                    Margin="10,0,0,0">
+                            <TextBlock  Text="Input Key"
+                                        Foreground="{StaticResource titleColor2}"
+                                        FontSize="30"
+                                        FontFamily="Montserrat"
+                                        FontWeight="Medium"
+                                        VerticalAlignment="Center"
+                                        Margin="0 0 10 0">
+                            </TextBlock>
+                            <Button Style="{StaticResource bar_button}"
+                                    Tag="{StaticResource color10}"
+                                    Width="30"
+                                    Height="30">
+                                <fa:IconImage Icon="FileUpload"  
+                                              Style="{StaticResource bar_button_icon}"
+                                              Height="30"
+                                              Width="30"/>
+                            </Button>
+                            <Button Style="{StaticResource bar_button}"
+                                    Tag="{StaticResource color1}"
+                                    Width="30"
+                                    Height="30">
+                                <fa:IconImage Icon="FileCircleCheck"                                              
+                                              Style="{StaticResource bar_button_icon}"
+                                              Height="30"
+                                              Width="30"/>
+                            </Button>
+                        </StackPanel>
+
+                        <TextBox x:Name="tb_Kprivate" 
+                                 Style="{StaticResource text_box_read_only}"
+                                 Grid.Row="1"
+                                 Margin="10,0,20,10"
+                                 Padding="5,5,5,5">
+                        </TextBox>
+
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+
+        </Border>
+
         <Border Grid.Row="1"
-                Background="#200F53"
-                CornerRadius="10" 
-                Padding="10">
-            <DataGrid ColumnWidth="*"
-                  Background="#200F53"
-                  BorderThickness="0">
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="#BCBEE0"/>
-                        <Setter Property="Padding" Value="10,0,0,10"/>
-                        <Setter Property="FontFamily" Value="Montserrat"/>
-                        <Setter Property="FontSize" Value="15"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ID" HeaderStringFormat=""/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="First name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Last name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Phone"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Number"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Address"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                CornerRadius="20"
+                Margin="0,10,0,10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                    <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".8*"/>
+                        <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="tb_file_name"
+                                Style="{StaticResource text_box_read_only}"
+                                Text="Load File...."
+                                VerticalContentAlignment="center"
+                                FontSize="23"
+                                TextWrapping="NoWrap"
+                                Cursor="IBeam"
+                                Grid.Row="0"
+                                Padding="12"
+                                Margin="10,10,0,10">
+                    </TextBox>
+
+                    <Button Style="{StaticResource bar_button}"
+                            Tag="{StaticResource color6}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Grid.Column="1">
+                        <fa:IconImage Icon="ArrowUpFromBracket"
+                                      Width="30"
+                                      Height="30"
+                                      Style="{StaticResource bar_button_icon}"/>
+                    </Button>
+
+                    <Button Style="{DynamicResource button}"                            
+                            Content="Decrypt"
+                            FontSize="23"
+                            Margin="10,10,10,10"
+                            Grid.Column="3">
+                    </Button>
+                </Grid>
+            </Grid>
         </Border>
 
     </Grid>

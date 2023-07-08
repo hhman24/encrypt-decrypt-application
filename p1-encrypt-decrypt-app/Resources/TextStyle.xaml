@@ -1,23 +1,57 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="TextBox" x:Key="TextBoxReadOnly">
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Height" Value="150"/>
-        <Setter Property="Width" Value="150"/>
-        
-        <Setter Property="Background" Value="{DynamicResource panelOverColor}"/>
-        <Setter Property="Foreground" Value="#9b9b9b"/>
-        <Setter Property="SelectionBrush" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="#333536"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="CaretBrush" Value="{DynamicResource titleColor1}"/>
-        <Setter Property="ContextMenu" Value="{x:Null}"/>
+    <Style TargetType="{x:Type TextBox}" x:Key="text_box_read_only">
+        <Setter Property="Foreground" Value="{DynamicResource titleColor2}"/>
+        <Setter Property="Background" Value="{DynamicResource color0}"/>
+        <!--<Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource color9}"/>-->
+        <!--<Setter Property="CaretBrush" Value="{DynamicResource titleColor1}"/>-->
+
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Cursor" Value="Arrow"/>
-        <Setter Property="IsReadOnly" Value="True"/>
+
+        <!--<Setter Property="SelectionBrush" Value="Transparent"/>-->
+        <!--<Setter Property="ContextMenu" Value="{x:Null}"/>-->
+        
+        <!--<Setter Property="IsReadOnly" Value="True"/>-->
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="15"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <TextBlock Text="{TemplateBinding Text}"
+                                   FontFamily="{TemplateBinding FontFamily}"
+                                   FontWeight="{TemplateBinding FontWeight}"
+                                   Cursor="{TemplateBinding Cursor}"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   TextWrapping="{TemplateBinding TextWrapping}"
+                                   Padding="{TemplateBinding Padding}"
+                                   ContextMenu="{TemplateBinding ContextMenu}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="title_block">
+        <Setter Property="Foreground" Value="{DynamicResource titleColor2}"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextAlignment" Value="Center"/>
     </Style>
 
 </ResourceDictionary>

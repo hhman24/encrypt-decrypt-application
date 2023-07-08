@@ -60,7 +60,7 @@ namespace p1_encrypt_decrypt_app {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/p1-encrypt-decrypt-app;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/p1-encrypt-decrypt-app;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

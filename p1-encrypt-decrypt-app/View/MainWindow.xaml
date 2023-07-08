@@ -10,7 +10,7 @@
         
         mc:Ignorable="d"
         
-        Title="Cryptography Application" Height="650" Width="1000"
+        Title="Cryptography Application" Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -31,7 +31,13 @@
     </Window.Resources>
 
     <Border CornerRadius="12">
-
+        <Border.Background>
+            <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
+                <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230"/>
@@ -93,17 +99,12 @@
             <!--#endregion Column 1-->
             <Border CornerRadius="0,12,12,0"
                     Grid.Column="1">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                        <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
-                        <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-
                 <Grid>
                     <Grid.RowDefinitions>
                         <!--control bar-->
                         <RowDefinition Height="30"/>
+                        
+                        <RowDefinition Height=".2*"/>
                         <!--content section-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -142,7 +143,9 @@
                     </StackPanel>
                     <!--content section-->
                     <ContentControl Content="{Binding Current_child_view}"
-                                    Grid.Row="1"
+                                    Grid.Row="2"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
                                     Margin="10">
                         
                     </ContentControl>

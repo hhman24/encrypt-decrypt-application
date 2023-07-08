@@ -20,6 +20,7 @@
     <SolidColorBrush x:Key="color8" Color="#78A3FC"/>
     <SolidColorBrush x:Key="color9" Color="#07F3C0"/>
     <SolidColorBrush x:Key="color10" Color="#FBA1AA"/>
+    <SolidColorBrush x:Key="color0" Color="#2B2730"/>
     <!--Font Colors-->
     <SolidColorBrush x:Key="titleColor1" Color="#E0E1F1"/>
     <SolidColorBrush x:Key="titleColor2" Color="#D5CFF5"/>
@@ -31,7 +32,32 @@
     <SolidColorBrush x:Key="panelColor" Color="#200F53"/>
     <SolidColorBrush x:Key="panelOverColor" Color="#281269"/>
     <SolidColorBrush x:Key="panelActiveColor" Color="#2B1372"/>
+    
     <!--Button Colors-->
     <!--TextBox Colors-->
+
+    <LinearGradientBrush x:Key="cs_Background" 
+                         StartPoint="0,0" EndPoint="0,5">
+        <GradientStop Color="#FF10658C" Offset="0.0"/>
+        <GradientStop Color="#FFF5ECEB" Offset="0.5"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="cs_Popup_Background" 
+                         StartPoint="0,0" EndPoint="0,5">
+        <GradientStop Color="#FF2F84AC" Offset="0.0"/>
+        <GradientStop Color="#FF97D5F2" Offset="0.5"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="cs_bacground_layer" Color="#FFF5ECEB" Opacity="0.2"/>
+    <SolidColorBrush x:Key="cs_border_brush" Color="#FF97CEDA"/>
+    <SolidColorBrush x:Key="cs_clouds" Color="#FFF5ECEB"/>
+    <SolidColorBrush x:Key="cs_watermark" Color="#FFC2BBBA"/>
+    <SolidColorBrush x:Key="cs_pink_soft" Color="#F58f84"/>
+    <SolidColorBrush x:Key="cs_text_color" Color="#FF333333"/>
+
+
+
+
+
     <!--Etc-->
 </ResourceDictionary>

@@ -15,5 +15,10 @@ namespace p1_encrypt_decrypt_app.View.Pages
             InitializeComponent();
             this.DataContext= view_model = new EncryptViewModel();
         }
+
+        private void KeySize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
