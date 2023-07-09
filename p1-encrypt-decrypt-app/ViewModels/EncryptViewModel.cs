@@ -82,16 +82,18 @@ namespace p1_encrypt_decrypt_app.ViewModels
             else
             {
                 // FILE PATH exsits
-                WinForms.FolderBrowserDialog dialog = new WinForms.FolderBrowserDialog();
+                //WinForms.FolderBrowserDialog dialog = new WinForms.FolderBrowserDialog();
 
-                WinForms.DialogResult result = dialog.ShowDialog();
-                if (result == WinForms.DialogResult.OK)
-                {
-                    string path_folder_des =dialog.SelectedPath;
-                    Kprivate = EncryptionAlgorithm.encypt(Path_File, path_folder_des, 2048);
-                }    
-                else MessageBox.Show("*Invalid File");
-                
+                //WinForms.DialogResult result = dialog.ShowDialog();
+                //if (result == WinForms.DialogResult.OK)
+                //{
+                //    string path_folder_des =dialog.SelectedPath;
+                //    Kprivate = EncryptionAlgorithm.encypt(Path_File, path_folder_des, 2048);
+                //    MessageBox.Show("Success");
+                //}
+
+                Kprivate = EncryptionAlgorithm.encypt(Path_File, 2048);
+
             }
             
         }

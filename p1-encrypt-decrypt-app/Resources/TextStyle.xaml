@@ -18,7 +18,7 @@
         
         <!--<Setter Property="IsReadOnly" Value="True"/>-->
         <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <!--<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>-->
 
         <Setter Property="Template">
             <Setter.Value>

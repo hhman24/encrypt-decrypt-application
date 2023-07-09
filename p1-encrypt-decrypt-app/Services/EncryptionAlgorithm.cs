@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 
 namespace p1_encrypt_decrypt_app.Services
 {
@@ -186,7 +187,7 @@ namespace p1_encrypt_decrypt_app.Services
             }
         }
         // Encrypt file
-        public static string encypt(string _path_src, string _path_des, int keysize)
+        public static string encypt(string _path_src, int keysize)
         {
             // Get key AES
             string key = EncryptionAlgorithm.Generate_AES_Key();
@@ -199,8 +200,7 @@ namespace p1_encrypt_decrypt_app.Services
             string c = EncryptionAlgorithm.Encrypt_AES(key, P);
 
             // Store file des
-            string file_des = Path.Combine(_path_des, Path.GetFileName(_path_src));
-            File.WriteAllText(file_des + ".metadata", c);
+            File.WriteAllText(_path_src + ".metadata", c);
 
             // Encrypt key of AES
             string Kpublic, Kprivate;
@@ -218,16 +218,29 @@ namespace p1_encrypt_decrypt_app.Services
         // Decrypt file
         public static bool decrypt(string path, string Kprivate)
         {
-            string[] lines = File.ReadAllLines(path + ".txt");
-            if (Hash_SHA1(Kprivate) != lines[1])
-            {
-                return false;
-            }
+            string file_name_src = Helper.cut_substring(Path.GetFileName(path), ".metadata");
+
+            // Store key file
+            string path_folder = Helper.path_to_project_not_bin("Assets");
+            // Path.GetFileName(path) = p1.jpg.metadata
+            string _key_file = Path.Combine(path_folder, file_name_src);
+
+            // Check key private.
+            string[] lines = File.ReadAllLines(_key_file + ".txt");
+            if (Hash_SHA1(Kprivate) != lines[1]) return false;
+
+            // Decrypt RSA
             string key = EncryptionAlgorithm.Decrypt_RSA(Kprivate, lines[0]);
-            string c = File.ReadAllText(path + ".metadata");
+
+            //Read file
+            string c = File.ReadAllText(path);
             string p = EncryptionAlgorithm.Decrypt_AES(key, c);
             byte[] P = Convert.FromBase64String(p);
-            File.WriteAllBytes(path, P);
+
+            // Write file
+            string n_name = "ah_" + file_name_src;
+            string src = Path.Combine(Path.GetDirectoryName(path), n_name);
+            File.WriteAllBytes(src, P);
             return true;
         }
     }

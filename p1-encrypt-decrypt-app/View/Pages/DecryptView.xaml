@@ -31,29 +31,31 @@
                 </Grid.RowDefinitions>
                 
                 <StackPanel Orientation="Horizontal"
-                                    Grid.Row="0"
-                                    Margin="10,0,0,0">
+                            Grid.Row="0"
+                            Margin="10,0,0,0">
                     <TextBlock  Text="Input Key"
-                                        Foreground="{StaticResource titleColor2}"
-                                        FontSize="30"
-                                        FontFamily="Montserrat"
-                                        FontWeight="Medium"
-                                        VerticalAlignment="Center"
-                                        Margin="0 0 10 0">
+                                Foreground="{StaticResource titleColor2}"
+                                FontSize="30"
+                                FontFamily="Montserrat"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="0 0 10 0">
                     </TextBlock>
                     <Button Style="{StaticResource bar_button}"
-                                    Tag="{StaticResource color10}"
-                                    Width="30"
-                                    Height="30">
+                            Tag="{StaticResource color10}"
+                            Command="{Binding import_key_file}"
+                            Width="30"
+                            Height="30">
                         <fa:IconImage Icon="FileUpload"  
-                                              Style="{StaticResource bar_button_icon}"
-                                              Height="30"
-                                              Width="30"/>
+                                      Style="{StaticResource bar_button_icon}"
+                                      Height="30"
+                                      Width="30"/>
                     </Button>
                 </StackPanel>
 
                 <TextBox x:Name="tb_Kprivate" 
                          Style="{StaticResource text_box_editable}"
+                         Text="{Binding Kprivate}"
                          Grid.Row="1"
                          VerticalContentAlignment="Top"
                          HorizontalContentAlignment="Left"
@@ -87,6 +89,7 @@
 
                 <TextBox x:Name="tb_file_name"
                          Style="{StaticResource text_box_editable}"
+                         Text="{Binding Path_File}"
                          Tag="Up load File....."
                          FontSize="23"
                          VerticalContentAlignment="Center"
@@ -96,6 +99,7 @@
 
                 <Button Style="{StaticResource bar_button}"
                         Tag="{StaticResource color6}"
+                        Command="{Binding get_path_file}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Grid.Column="1">
@@ -105,7 +109,8 @@
                                   Style="{StaticResource bar_button_icon}"/>
                 </Button>
 
-                <Button Style="{DynamicResource button}"                            
+                <Button Style="{DynamicResource button}"
+                        Command="{Binding decrypt_file}"
                         Content="Decrypt"
                         FontSize="23"
                         Margin="10,10,10,10"
