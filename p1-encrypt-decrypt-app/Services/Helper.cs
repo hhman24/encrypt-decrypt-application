@@ -33,5 +33,12 @@ namespace p1_encrypt_decrypt_app.Services
 
             return path_folder;
         }
+
+        public static string cut_substring(string str, string sub_str)
+        {
+            int last_index = str.LastIndexOf(sub_str);
+            if (last_index != 1) return str.Substring(0, last_index);
+            else return str;
+        }
     }
 }
