@@ -43,6 +43,7 @@
                 <ColumnDefinition Width="230"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
             <!--#region Column 0-->
             <Border CornerRadius="12,0,0,12"
                     Grid.Column="0">
@@ -77,7 +78,8 @@
                                  IsChecked="True"
                                  Command="{Binding ShowEncryptViewCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Lock" Style="{StaticResource menu_button_icon}"/>
+                            <fa:IconImage Icon="Lock" 
+                                          Style="{StaticResource menu_button_icon}"/>
                             <TextBlock Text="Encryption" 
                                        Style="{StaticResource menu_button_text}"
                                        FontSize="23"/>
@@ -87,7 +89,8 @@
                                  Tag="{StaticResource color8}"
                                  Command="{Binding ShowDecryptViewCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="LockOpen" Style="{StaticResource menu_button_icon}"/>
+                            <fa:IconImage Icon="LockOpen" 
+                                          Style="{StaticResource menu_button_icon}"/>
                             <TextBlock Text="Decryption" 
                                        Style="{StaticResource menu_button_text}"
                                        FontSize="23"/>
@@ -96,6 +99,7 @@
                 </StackPanel>
             </Border>
             <!--#endregion Column 0-->
+            
             <!--#endregion Column 1-->
             <Border CornerRadius="0,12,12,0"
                     Grid.Column="1">
@@ -104,7 +108,7 @@
                         <!--control bar-->
                         <RowDefinition Height="30"/>
                         
-                        <RowDefinition Height=".2*"/>
+                        <RowDefinition Height=".1*"/>
                         <!--content section-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>

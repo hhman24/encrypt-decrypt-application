@@ -30,20 +30,97 @@
                             SnapsToDevicePixels="True"
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Stretch">
-                        <TextBlock Text="{TemplateBinding Text}"
-                                   FontFamily="{TemplateBinding FontFamily}"
-                                   FontWeight="{TemplateBinding FontWeight}"
-                                   Cursor="{TemplateBinding Cursor}"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   TextWrapping="{TemplateBinding TextWrapping}"
-                                   Padding="{TemplateBinding Padding}"
-                                   ContextMenu="{TemplateBinding ContextMenu}"/>
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="False"
+                                          Margin="5 0 0 0"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"/>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type TextBox}" x:Key="text_box_editable">
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="Foreground" Value="{DynamicResource titleColor1}"/>
+        <Setter Property="Background" Value="{DynamicResource color0}"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource color8}"/>
+        <!--<Setter Property="CaretBrush" Value="{DynamicResource titleColor1}"/>-->
+        <!--<Setter Property="SelectionBrush" Value="Transparent"/>-->
+        <!--<Setter Property="ContextMenu" Value="{x:Null}"/>-->
+        <!--<Setter Property="IsReadOnly" Value="True"/>-->
+        <!--<Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="tb_Border" 
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            HorizontalAlignment="{TemplateBinding VerticalAlignment}"
+                            SnapsToDevicePixels="True"
+                            CornerRadius="15">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="False"
+                                          Margin="5 0 0 0"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"/>
+                            <!--<Label x:Name="Watermark"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Visibility="Collapsed"
+                                   Padding="5 0 20 0"
+                                   Foreground="{StaticResource cs_watermark}"
+                                   Content="{TemplateBinding Tag}"/>-->
+                            <TextBlock x:Name="Watermark"
+                                       Foreground="{DynamicResource titleColor3}"
+                                       Text="{TemplateBinding Tag}"
+                                       Padding="5 0 0 0"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderThickness" Value="3"
+                                    TargetName="tb_Border"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderThickness" Value="3"
+                                    TargetName="tb_Border"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value=""/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible"
+                                    TargetName="Watermark"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+    
     <Style TargetType="TextBlock" x:Key="title_block">
         <Setter Property="Foreground" Value="{DynamicResource titleColor2}"/>
         <Setter Property="FontSize" Value="32"/>

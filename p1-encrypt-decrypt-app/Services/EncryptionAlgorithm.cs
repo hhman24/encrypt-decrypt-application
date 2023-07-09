@@ -1,20 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.IO;
 
 namespace p1_encrypt_decrypt_app.Services
 {
     public class EncryptionAlgorithm
     {
 
-        /*
-         * Generate Kprivate and Kpublic
-         */
+        // Generate Kprivate and Kpublic
         public static (string, string) Generate_RSA_Key(int keySize)
         {
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(keySize))
@@ -32,7 +26,7 @@ namespace p1_encrypt_decrypt_app.Services
                 }
             }
         }
-        //encrypt RSA
+        //Encrypt RSA
         public static string Encrypt_RSA(string Kpublic, string p)
         {
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
@@ -51,7 +45,7 @@ namespace p1_encrypt_decrypt_app.Services
                 }
             }
         }
-        //decrypt RSA
+        //Decrypt RSA
         public static string Decrypt_RSA(string Kprivate, string c)
         {
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
@@ -70,8 +64,8 @@ namespace p1_encrypt_decrypt_app.Services
                 }
             }
         }
-
-         public static string Hash_SHA1(string p)
+        // Hash SHA-1
+        public static string Hash_SHA1(string p)
         {
             using (SHA1 hash_sha1 = SHA1.Create())
             {   
@@ -86,7 +80,7 @@ namespace p1_encrypt_decrypt_app.Services
             }
      
         }
-
+        // Hash SHA-256
         public static string Hash_SHA256(string p)
         {
             using (SHA256 hash_sha1 = SHA256.Create())
@@ -191,21 +185,37 @@ namespace p1_encrypt_decrypt_app.Services
                 }
             }
         }
-
-        public static string encypt(string path, int keysize)
+        // Encrypt file
+        public static string encypt(string _path_src, string _path_des, int keysize)
         {
+            // Get key AES
             string key = EncryptionAlgorithm.Generate_AES_Key();
-            byte[] p = File.ReadAllBytes(path);
-            string P = Convert.ToBase64String(p);
-            string c = EncryptionAlgorithm.Encrypt_AES(key, P);
-            File.WriteAllText(path+".metadata", c);
 
+            // Read file source
+            byte[] p = File.ReadAllBytes(_path_src);
+            string P = Convert.ToBase64String(p);
+
+            // Encrypt AES
+            string c = EncryptionAlgorithm.Encrypt_AES(key, P);
+
+            // Store file des
+            string file_des = Path.Combine(_path_des, Path.GetFileName(_path_src));
+            File.WriteAllText(file_des + ".metadata", c);
+
+            // Encrypt key of AES
             string Kpublic, Kprivate;
             (Kpublic, Kprivate) = EncryptionAlgorithm.Generate_RSA_Key(keysize);
             key = EncryptionAlgorithm.Encrypt_RSA(Kpublic, key);
-            File.WriteAllText(path + ".txt", key + '\n' + Hash_SHA1(Kprivate));
+
+            // Store key file
+            string path_folder = Helper.path_to_project_not_bin("Assets");
+
+            // Path of project
+            string _key_file = Path.Combine(path_folder, Path.GetFileName(_path_src));
+            File.WriteAllText(_key_file + ".txt", key + '\n' + Hash_SHA1(Kprivate));
             return Kprivate;
         }
+        // Decrypt file
         public static bool decrypt(string path, string Kprivate)
         {
             string[] lines = File.ReadAllLines(path + ".txt");

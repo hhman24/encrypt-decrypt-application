@@ -35,8 +35,6 @@ namespace p1_encrypt_decrypt_app.ViewModels
             
             //Default view
             ExecuteShowEncryptViewCommand(null);
-
-
         }
 
         private void ExecuteShowEncryptViewCommand(object obj)

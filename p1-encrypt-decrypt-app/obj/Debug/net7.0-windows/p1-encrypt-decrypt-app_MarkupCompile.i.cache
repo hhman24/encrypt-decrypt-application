@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 D:\STUDY\CSC15001_ANMT\project\PO-1\p1-encrypt-decrypt-app\p1-encrypt-decrypt-app\App.xaml
 7-1487383442
 
-13-1025812913
+141114350249
 208583846181
 Resources\ButtonStyle.xaml;Resources\ComboBoxStyle.xaml;Resources\TextStyle.xaml;Resources\UIColor.xaml;View\MainWindow.xaml;View\Pages\DecryptView.xaml;View\Pages\EncryptView.xaml;
 
-True
+False
 

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:p1_encrypt_decrypt_app.View.Pages"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700"
+             d:DesignWidth="700"
              Background="Transparent">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
 
         <Border Grid.Row="0"
                 CornerRadius="20"
-                Margin="0,10,0,10">
+                Margin="0,15,0,15">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
                     <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
@@ -25,75 +25,44 @@
             </Border.Background>
 
             <Grid>
-                <!--<Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".2*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140*"/>
-                        <ColumnDefinition Width="127*"/>
-                        <ColumnDefinition Width="70*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="AES Algorithm"
-                               Style="{StaticResource title_block}"
-                               Grid.Column="0"/>
-                </Grid>-->
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height=".2*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Orientation="Horizontal"
+                
+                <StackPanel Orientation="Horizontal"
                                     Grid.Row="0"
                                     Margin="10,0,0,0">
-                            <TextBlock  Text="Input Key"
+                    <TextBlock  Text="Input Key"
                                         Foreground="{StaticResource titleColor2}"
                                         FontSize="30"
                                         FontFamily="Montserrat"
                                         FontWeight="Medium"
                                         VerticalAlignment="Center"
                                         Margin="0 0 10 0">
-                            </TextBlock>
-                            <Button Style="{StaticResource bar_button}"
+                    </TextBlock>
+                    <Button Style="{StaticResource bar_button}"
                                     Tag="{StaticResource color10}"
                                     Width="30"
                                     Height="30">
-                                <fa:IconImage Icon="FileUpload"  
+                        <fa:IconImage Icon="FileUpload"  
                                               Style="{StaticResource bar_button_icon}"
                                               Height="30"
                                               Width="30"/>
-                            </Button>
-                            <Button Style="{StaticResource bar_button}"
-                                    Tag="{StaticResource color1}"
-                                    Width="30"
-                                    Height="30">
-                                <fa:IconImage Icon="FileCircleCheck"                                              
-                                              Style="{StaticResource bar_button_icon}"
-                                              Height="30"
-                                              Width="30"/>
-                            </Button>
-                        </StackPanel>
+                    </Button>
+                </StackPanel>
 
-                        <TextBox x:Name="tb_Kprivate" 
-                                 Style="{StaticResource text_box_read_only}"
-                                 Grid.Row="1"
-                                 Margin="10,0,20,10"
-                                 Padding="5,5,5,5">
-                        </TextBox>
+                <TextBox x:Name="tb_Kprivate" 
+                         Style="{StaticResource text_box_editable}"
+                         Grid.Row="1"
+                         VerticalContentAlignment="Top"
+                         HorizontalContentAlignment="Left"
+                         TextWrapping="Wrap"
+                         Margin="5"
+                         Padding="5,5,5,5">
+                </TextBox>
 
-                    </Grid>
 
-                </Grid>
 
             </Grid>
 
@@ -101,55 +70,47 @@
 
         <Border Grid.Row="1"
                 CornerRadius="20"
-                Margin="0,10,0,10">
+                VerticalAlignment="top"
+                Margin="0 15 0 15">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
                     <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
                     <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <Grid Height="70">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".8*"/>
+                    <ColumnDefinition Width=".1*"/>
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".8*"/>
-                        <ColumnDefinition Width=".1*"/>
-                        <ColumnDefinition Width=".2*"/>
-                    </Grid.ColumnDefinitions>
+                <TextBox x:Name="tb_file_name"
+                         Style="{StaticResource text_box_editable}"
+                         Tag="Up load File....."
+                         FontSize="23"
+                         VerticalContentAlignment="Center"
+                         Grid.Column="0"
+                         Margin="10">
+                </TextBox>
 
-                    <TextBox x:Name="tb_file_name"
-                                Style="{StaticResource text_box_read_only}"
-                                Text="Load File...."
-                                VerticalContentAlignment="center"
-                                FontSize="23"
-                                TextWrapping="NoWrap"
-                                Cursor="IBeam"
-                                Grid.Row="0"
-                                Padding="12"
-                                Margin="10,10,0,10">
-                    </TextBox>
+                <Button Style="{StaticResource bar_button}"
+                        Tag="{StaticResource color6}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Grid.Column="1">
+                    <fa:IconImage Icon="ArrowUpFromBracket"
+                                  Width="30"
+                                  Height="30"
+                                  Style="{StaticResource bar_button_icon}"/>
+                </Button>
 
-                    <Button Style="{StaticResource bar_button}"
-                            Tag="{StaticResource color6}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Grid.Column="1">
-                        <fa:IconImage Icon="ArrowUpFromBracket"
-                                      Width="30"
-                                      Height="30"
-                                      Style="{StaticResource bar_button_icon}"/>
-                    </Button>
-
-                    <Button Style="{DynamicResource button}"                            
-                            Content="Decrypt"
-                            FontSize="23"
-                            Margin="10,10,10,10"
-                            Grid.Column="3">
-                    </Button>
-                </Grid>
+                <Button Style="{DynamicResource button}"                            
+                        Content="Decrypt"
+                        FontSize="23"
+                        Margin="10,10,10,10"
+                        Grid.Column="2">
+                </Button>
             </Grid>
         </Border>
 

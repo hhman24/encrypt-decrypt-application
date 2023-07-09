@@ -87,7 +87,7 @@
                                HorizontalAlignment="Left"
                                Foreground="{StaticResource cs_watermark}"
                                Visibility="Collapsed"
-                               Padding="80 0 0 0"
+                               Padding="60 0 0 0"
                                Content="{TemplateBinding Tag}"
                                FontFamily="Montserrat"
                                FontWeight="Medium"

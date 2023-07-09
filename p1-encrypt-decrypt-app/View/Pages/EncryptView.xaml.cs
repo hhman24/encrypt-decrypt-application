@@ -1,4 +1,5 @@
 ﻿using p1_encrypt_decrypt_app.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace p1_encrypt_decrypt_app.View.Pages
@@ -8,17 +9,13 @@ namespace p1_encrypt_decrypt_app.View.Pages
     /// </summary>
     public partial class EncryptView : UserControl
     {
-        public EncryptViewModel view_model { get; set; }
+        public EncryptViewModel view_model { get; set; }    
 
         public EncryptView()
         {
             InitializeComponent();
-            this.DataContext= view_model = new EncryptViewModel();
-        }
-
-        private void KeySize_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            this.DataContext = view_model = new EncryptViewModel();
+            EncryptViewModel.Cur = this;
         }
     }
 }
