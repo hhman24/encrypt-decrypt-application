@@ -104,7 +104,7 @@
                                     TargetName="tb_Border"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="BorderThickness" Value="3"
+                            <Setter Property="BorderThickness" Value="2.1"
                                     TargetName="tb_Border"/>
                         </Trigger>
                         <MultiTrigger>

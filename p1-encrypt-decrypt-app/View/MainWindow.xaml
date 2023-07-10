@@ -96,6 +96,24 @@
                                        FontSize="23"/>
                         </StackPanel>
                     </RadioButton>
+                    
+                    <TextBlock Text=" Contract with us: AH GROUP"
+                               Foreground="{StaticResource titleColor3}"
+                               FontSize="10"
+                               FontFamily="Montserrat"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0 250 0 0"/>
+                    <TextBlock Text=" 20127102@student.hcmus.edu.vn"
+                               Foreground="{StaticResource titleColor3}"
+                               FontSize="10"
+                               FontFamily="Montserrat"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0 5 0 0"/>
+
                 </StackPanel>
             </Border>
             <!--#endregion Column 0-->
@@ -108,7 +126,7 @@
                         <!--control bar-->
                         <RowDefinition Height="30"/>
                         
-                        <RowDefinition Height=".1*"/>
+                        <RowDefinition Height=".2*"/>
                         <!--content section-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -145,6 +163,8 @@
 
                         </Button>
                     </StackPanel>
+                    
+                    
                     <!--content section-->
                     <ContentControl Content="{Binding Current_child_view}"
                                     Grid.Row="2"

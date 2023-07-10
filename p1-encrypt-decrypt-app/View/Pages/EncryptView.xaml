@@ -112,8 +112,9 @@
                     </StackPanel>
 
                     <TextBox x:Name="tb_Kprivate" 
-                             Style="{StaticResource text_box_read_only}"
-                             Text="{Binding Kprivate}"   
+                             Style="{StaticResource text_box_editable}"
+                             Text="{Binding Kprivate}"
+                             TextWrapping="Wrap"
                              Grid.Row="1"
                              Margin="10,0,10,10"
                              Padding="5,5,5,5">

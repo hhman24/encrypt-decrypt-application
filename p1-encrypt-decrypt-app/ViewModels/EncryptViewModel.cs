@@ -100,7 +100,7 @@ namespace p1_encrypt_decrypt_app.ViewModels
 
         private void ExecuteCopyKeyClipBoardCommand(object obj)
         {
-            Clipboard.SetText(_Kprivate);
+            if(!string.IsNullOrEmpty(Kprivate)) Clipboard.SetText(Kprivate);
         }
 
         private void ExecuteExportKeyFileCommand(object obj)
