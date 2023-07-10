@@ -8,4 +8,23 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Model\**" />
+    <Compile Remove="ViewModel\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="ViewModel\**" />
+    <None Remove="Model\**" />
+    <None Remove="ViewModel\**" />
+    <Page Remove="Model\**" />
+    <Page Remove="ViewModel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="p1_encrypt_decrypt_app.View.Pages.DecryptView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:p1_encrypt_decrypt_app.View.Pages"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignWidth="700"
+             Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                CornerRadius="20"
+                Margin="0,15,0,15">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                    <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0"
+                            Margin="10,0,0,0">
+                    <TextBlock  Text="Input Key"
+                                Foreground="{StaticResource titleColor2}"
+                                FontSize="30"
+                                FontFamily="Montserrat"
+                                FontWeight="Medium"
+                                VerticalAlignment="Center"
+                                Margin="0 0 10 0">
+                    </TextBlock>
+                    <Button Style="{StaticResource bar_button}"
+                            Tag="{StaticResource color10}"
+                            Command="{Binding import_key_file}"
+                            Width="30"
+                            Height="30">
+                        <fa:IconImage Icon="FileUpload"  
+                                      Style="{StaticResource bar_button_icon}"
+                                      Height="30"
+                                      Width="30"/>
+                    </Button>
+                </StackPanel>
+
+                <TextBox x:Name="tb_Kprivate" 
+                         Style="{StaticResource text_box_editable}"
+                         Text="{Binding Kprivate}"
+                         Grid.Row="1"
+                         VerticalContentAlignment="Top"
+                         HorizontalContentAlignment="Left"
+                         TextWrapping="Wrap"
+                         Margin="5"
+                         Padding="5,5,5,5">
+                </TextBox>
+
+
+
+            </Grid>
+
+        </Border>
+
+        <Border Grid.Row="1"
+                CornerRadius="20"
+                VerticalAlignment="top"
+                Margin="0 15 0 15">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                    <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Height="70">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".8*"/>
+                    <ColumnDefinition Width=".1*"/>
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="tb_file_name"
+                         Style="{StaticResource text_box_editable}"
+                         Text="{Binding Path_File}"
+                         Tag="Up load File....."
+                         FontSize="23"
+                         VerticalContentAlignment="Center"
+                         Grid.Column="0"
+                         Margin="10">
+                </TextBox>
+
+                <Button Style="{StaticResource bar_button}"
+                        Tag="{StaticResource color6}"
+                        Command="{Binding get_path_file}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Grid.Column="1">
+                    <fa:IconImage Icon="ArrowUpFromBracket"
+                                  Width="30"
+                                  Height="30"
+                                  Style="{StaticResource bar_button_icon}"/>
+                </Button>
+
+                <Button Style="{DynamicResource button}"
+                        Command="{Binding decrypt_file}"
+                        Content="Decrypt"
+                        FontSize="23"
+                        Margin="10,10,10,10"
+                        Grid.Column="2">
+                </Button>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

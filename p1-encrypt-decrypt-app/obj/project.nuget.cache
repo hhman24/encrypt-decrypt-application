@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UTl9jnqu4kg1ElpmwhmTF+B3RLWHoChxUAVsvrFy3b6kJqxNxsVeVGvngsmzDbqMfmJBe3tTr+kH/XPxukHPdw==",
+  "dgSpecHash": "T1TMe9B1T1R+UjYjMXQW3Ilv7XJ58B++sBx1z+Bd16+gQn9KdSpL2+oKfxTR7EkmIo9Kmh77fEeRxs4db873/g==",
   "success": true,
   "projectFilePath": "D:\\STUDY\\CSC15001_ANMT\\project\\PO-1\\p1-encrypt-decrypt-app\\p1-encrypt-decrypt-app\\p1-encrypt-decrypt-app.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\hhman\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 D:\STUDY\CSC15001_ANMT\project\PO-1\p1-encrypt-decrypt-app\p1-encrypt-decrypt-app\App.xaml
-11407045341
+7-1487383442
 
-5-2127324505
-198-1175457984
-MainWindow.xaml;
+141114350249
+208583846181
+Resources\ButtonStyle.xaml;Resources\ComboBoxStyle.xaml;Resources\TextStyle.xaml;Resources\UIColor.xaml;View\MainWindow.xaml;View\Pages\DecryptView.xaml;View\Pages\EncryptView.xaml;
 
-False
+True
 

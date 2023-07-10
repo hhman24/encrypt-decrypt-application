@@ -7,7 +7,33 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Compile Update="View\Pages\DecryptView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\EncryptView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Resources\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\TextStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\UIColor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\DecryptView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\EncryptView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
